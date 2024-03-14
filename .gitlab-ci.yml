@@ -38,6 +38,7 @@ deploy:
       git config user.email "ricardotovar.grupobruild@gmail.com"
       git add .
       git commit -m "Deploy from GitLab CI"
-      git push --set-upstream https://$ARM_CLIENT_ID:$ARM_CLIENT_SECRET@sampleangularazure.scm.azurewebsites.net/sampleangularazure.git master
+      git push https://$ARM_CLIENT_ID:$ARM_CLIENT_SECRET@sampleangularazure.scm.azurewebsites.net/sampleangularazure.git master
+
   only:
     - master
