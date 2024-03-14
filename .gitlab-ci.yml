@@ -24,11 +24,8 @@ build:
 deploy:
   stage: deploy
   script:
-    - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-    - |
-      az webapp deployment source config-zip \
-        --resource-group grupo-recursos-prueba \
-        --name sampleangularazure \
-        --src dist.zip
+     - |
+      az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
+      az webapp deployment source config-zip --resource-group grupo-recursos-prueba --name sampleangularazure --src dist.zip
   only:
     - master
