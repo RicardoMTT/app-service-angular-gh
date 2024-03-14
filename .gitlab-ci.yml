@@ -38,7 +38,7 @@ deploy:
       git config user.email "ricardotovar.grupobruild@gmail.com"
       git add .
       git commit -m "Deploy from GitLab CI"
-      git push https://sampleangularazure.scm.azurewebsites.net:443/sampleangularazure.git master
+      git push https://sampleangularazure.scm.azurewebsites.net/sampleangularazure.git master
 
   only:
     - master
