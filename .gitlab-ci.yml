@@ -24,8 +24,8 @@ build:
 deploy:
   stage: deploy
   script:
+    - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     - |
-      apt-get update && apt-get install -y --no-install-recommends
       az webapp deployment source config-zip \
         --resource-group grupo-recursos-prueba \
         --name sampleangularazure \
