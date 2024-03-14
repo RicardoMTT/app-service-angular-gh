@@ -38,6 +38,6 @@ deploy:
       git config user.email "ricardotovar.grupobruild@gmail.com"
       git add .
       git commit -m "Deploy from GitLab CI"
-      git push https://$ARM_CLIENT_ID:$ARM_CLIENT_SECRET@<app-service-name>.scm.azurewebsites.net/<app-service-name>.git
+      git push https://$ARM_CLIENT_ID:$ARM_CLIENT_SECRET@sampleangularazure.scm.azurewebsites.net/sampleangularazure.git
   only:
     - master
