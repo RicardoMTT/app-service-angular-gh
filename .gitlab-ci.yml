@@ -24,7 +24,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
     - |
       az webapp deployment source config-zip \
         --resource-group grupo-recursos-prueba \
