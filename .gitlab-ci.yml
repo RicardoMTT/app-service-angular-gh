@@ -1,34 +1,34 @@
-# image: node:18
+image: node:18
 
-# # This command is run before the execution of stages
-# before_script:
-#   - npm install
+# This command is run before the execution of stages
+before_script:
+  - npm install
 
-# stages:
-#   - build
-#   - deploy
+stages:
+  - build
+  - deploy
 
-# # Nombre del job
-# build:
-#   stage: build
-#   script:
-#     - rm ./package-lock.json
-#     - npm run build --prod
-#   artifacts:
-#     paths:
-#       - dist/azure-angular/
-#   only:
-#     - master
+# Nombre del job
+build:
+  stage: build
+  script:
+    - rm ./package-lock.json
+    - npm run build --prod
+  artifacts:
+    paths:
+      - dist/azure-angular/
+  only:
+    - master
 
 
-# deploy:
-#   stage: deploy
-#   script:
-#     - |
-#       apt-get update && apt-get install -y --no-install-recommends
-#       az webapp deployment source config-zip \
-#         --resource-group grupo-recursos-prueba \
-#         --name sampleangularazure \
-#         --src dist.zip
-#   only:
-#     - master
+deploy:
+  stage: deploy
+  script:
+    - |
+      apt-get update && apt-get install -y --no-install-recommends
+      az webapp deployment source config-zip \
+        --resource-group grupo-recursos-prueba \
+        --name sampleangularazure \
+        --src dist.zip
+  only:
+    - master
