@@ -2,8 +2,6 @@ name: JavaScript CI
 
 on: [push]
 
-name: Node.js
-
 env:
   AZURE_WEBAPP_NAME: sampleangularazure   # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: app-service-angular-gh      # set this to the path to your web app project, defaults to the repository root
