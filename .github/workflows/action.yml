@@ -24,8 +24,9 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run test -- --configuration=ci
-  # build-and-deploy:
+        run: npm run test -- --no-watch --code-coverage --browsers=ChromeHeadlessCI
+
+      # build-and-deploy:
   #   runs-on: ubuntu-latest
   #   steps:
   #   # checkout the repo
