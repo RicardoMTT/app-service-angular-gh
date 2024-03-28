@@ -1,42 +1,59 @@
-name: JavaScript CI
+name: Angular CI CD
 
 on: [push]
 
 env:
   AZURE_WEBAPP_NAME: sampleangularazure   # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: dist   # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: src   # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '18.x'                # set this to the node version to use
 
 jobs:
-  build-and-deploy:
+
+  test:
     runs-on: ubuntu-latest
     steps:
-    # checkout the repo
-    - name: 'Checkout GitHub Action'
-      uses: actions/checkout@main
+      - name: Clone
+        uses: actions/checkout@v3
 
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Node Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
 
-    - name: Setup Node ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm ci
 
-    - name: 'npm install, build, and test'
-      run: |
-        npm install
-        npm run build --if-present
-      working-directory:  dist
+      - name: Run tests
+        run: npm run test -- --no-watch --code-coverage --browsers=ChromeHeadlessCI
+  # build-and-deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # checkout the repo
+  #   - name: 'Checkout GitHub Action'
+  #     uses: actions/checkout@main
 
-    # deploy web app using Azure credentials
-    - uses: azure/webapps-deploy@v3
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+  #   - uses: azure/login@v1
+  #     with:
+  #       creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Azure logout
-    - name: logout
-      run: |
-        az logout
+  #   - name: Setup Node ${{ env.NODE_VERSION }}
+  #     uses: actions/setup-node@v4
+  #     with:
+  #       node-version: ${{ env.NODE_VERSION }}
+
+  #   - name: 'npm install, build, and test'
+  #     run: |
+  #       npm install
+  #       npm run build --if-present
+  #     working-directory:  src
+
+  #   # deploy web app using Azure credentials
+  #   - uses: azure/webapps-deploy@v3
+  #     with:
+  #       app-name: ${{ env.AZURE_WEBAPP_NAME }}
+  #       package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  #   # Azure logout
+  #   - name: logout
+  #     run: |
+  #       az logout
