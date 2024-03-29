@@ -24,8 +24,8 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        # run: npm run test -- --no-watch --code-coverage --browsers=ChromeHeadlessCI
-        run: npx ng test --no-watch --code-coverage --browsers=ChromeHeadlessCI
+        run: npm run test -- --no-watch --code-coverage --browsers=ChromeHeadlessCI
+        # run: npx ng test --no-watch --code-coverage --browsers=ChromeHeadlessCI
 
       # build-and-deploy:
   #   runs-on: ubuntu-latest
