@@ -42,11 +42,11 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome','ChromeHeadless','ChromeHeadlessCI'],
+    browsers: ['Chrome','ChromeHeadless','ChromeHeadlessCI'],// Navegadores en los que se ejecutara las pruebas , ChromeHeadless(no se abrira un navegador para ejecutar las pruebas) , ChromeHeadlessCI(launcher personalizado)
     customLaunchers: {
       ChromeHeadlessCI: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
+        base: 'ChromeHeadless',// El nuevo launcher se basara en ChromeHeadless
+        flags: ['--no-sandbox']//deshabilita el uso de la sandbox del navegador, ya que el se ejecturar chrome en un entorno de ci sin interfaz grafica, por lo que si esta activado puede traer problemas ya que el sandbox require un entorno interactivo para funcionar correctamente
       }
     },
     singleRun: true,
